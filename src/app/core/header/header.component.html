@@ -2,9 +2,13 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a routerLink="/" class="navbar-brand">Recipe Book</a>
+      <button type="button" class="navbar-toggle" (click)="isCollapsed = !isCollapsed">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     </div>
-
-    <div class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="navbar" [collapse]="isCollapsed">
       <ul class="nav navbar-nav navbar-right">
         <ng-template >
           <li><a routerLink="/signup">Register</a></li>
