@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Response} from '@angular/http';
-
+import {AuthService} from '../../auth/auth.service';
 
 @Component({
   selector : 'app-header',
@@ -8,7 +8,17 @@ import {Response} from '@angular/http';
 })
 
 export class HeaderComponent {
-  constructor(){}
+  constructor( private authService : AuthService){}
 
+  onSaveData(){
+
+  }
+
+  onFetchData(){
+  }
+
+  onLogout(){
+
+  }
 
 }
