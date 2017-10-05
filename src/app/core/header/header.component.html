@@ -10,16 +10,16 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav navbar-left">
-        <ng-template [ngIf]="!authService.isAuthenticated()">
-          <li><a routerLink="/cajero">Cajero</a></li>
-          <li><a routerLink="/chef">Chef</a></li>
-          <li><a routerLink="/administrador">Administrador</a></li>
+        <ng-template [ngIf]="authService.isAuthenticated()">
+          <li><a routerLinkActive="active" routerLink="/cashier">Cajero</a></li>
+          <li><a routerLinkActive="active" routerLink="/chef">Chef</a></li>
+          <li><a routerLinkActive="active" routerLink="/manager">Administrador</a></li>
         </ng-template>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <ng-template [ngIf]="!authService.isAuthenticated()">
-          <li><a routerLink="/jj">Register</a></li>
-          <li><a routerLink="/pp">Login</a></li>
+          <li><a routerLink="/signup">Register</a></li>
+          <li><a routerLink="/signin">Login</a></li>
         </ng-template>
         <li><a
           style="cursor: pointer;"
