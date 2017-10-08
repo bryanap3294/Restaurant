@@ -7,6 +7,7 @@ import { CashierComponent } from './cashier/cashier.component';
 import { ManagerComponent } from './manager/manager.component';
 import { ChefComponent } from './chef/chef.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SharedModule } from '../shared/shared.module';
     RolRoutingModule,
     ReactiveFormsModule,
     SharedModule,
+    FormsModule,
   ]
 })
 export class RolModule {
