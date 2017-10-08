@@ -6,6 +6,7 @@ import {AppRoutingModule} from '../app-routing.module';
 import {AuthService} from '../auth/auth.service';
 import {DataStorageService} from '../shared/data-storage.service';
 import { OrdenService } from '../model/orden/orden.service';
+import { PlatoService } from '../model/orden/plato/plato.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { OrdenService } from '../model/orden/orden.service';
   providers: [
     AuthService,
     OrdenService,
+    PlatoService,
     DataStorageService,
   ]
 })
