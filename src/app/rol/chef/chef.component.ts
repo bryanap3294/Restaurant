@@ -2,8 +2,9 @@ import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import {NgForm} from '@angular/forms';
-import {Plato} from '../../model/orden/plato/plato.model';
-import {PlatoService} from '../../model/orden/plato/plato.service';
+import {Orden} from '../../model/orden/orden.model';
+import {OrdenService} from '../../model/orden/orden.service';
+import { Plato } from '../../model/orden/plato/plato.model';
 
 
 @Component({
@@ -16,38 +17,38 @@ export class ChefComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   editMode = false;
   editedItemIndex: number;
-  editedItem: Plato;
+  editedItem: Orden;
 
-  platos: Plato[];
+  ordenes: Orden[];
   //private subscription: Subscription;
 
-  constructor(private platoService: PlatoService) { }
+  constructor(private ordenService: OrdenService) { }
 
   ngOnInit() {
-    this.platos = this.platoService.getPlatos();
-    this.subscription =  this.platoService.platosChanged
+    this.ordenes = this.ordenService.getOrdenes();
+    this.subscription =  this.ordenService.ordenChanged
     .subscribe(
-      (platos: Plato[]) =>{
-        this.platos = platos;
+      (ordenes: Orden[]) =>{
+        this.ordenes = ordenes;
       }
     );
 
-    this.subscription = this.platoService.startedEditing
+    this.subscription = this.ordenService.startedEditing
     .subscribe(
       (index:number) => {
         this.editedItemIndex = index;
         this.editMode = true;
-        this.editedItem = this.platoService.getPlato(index);
+        this.editedItem = this.ordenService.getOrden(index);
         this.slForm.setValue({
-            name: this.editedItem.nombrePlato,
-            amount: this.editedItem.precio
+            name: this.editedItem.nombreCliente,
+            amount: this.editedItem.monto
         })
       }
     );
   }
 
   onEditItem(index: number){
-    this.platoService.startedEditing.next(index);
+    this.ordenService.startedEditing.next(index);
   }
 
   ngOnDestroy(){
@@ -56,11 +57,11 @@ export class ChefComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm){
     const value = form.value;
-    const newPlato = new Plato(value.name, value.amount);
+    const newOrden = new Orden(value.name, value.amount, [new Plato('arros', 23)]);
     if (this.editMode){
-      this.platoService.updatePlato(this.editedItemIndex, newPlato);
+      this.ordenService.updateOrden(this.editedItemIndex, newOrden);
     } else{
-      this.platoService.addPlato(newPlato);
+      this.ordenService.addOrden(newOrden);
     }
     this.editMode = false;
     form.reset();
@@ -72,7 +73,7 @@ export class ChefComponent implements OnInit, OnDestroy {
   }
 
   onDelete(){
-    this.platoService.deletePlato(this.editedItemIndex);
+    this.ordenService.deleteOrden(this.editedItemIndex);
     this.onClear();
   }
 

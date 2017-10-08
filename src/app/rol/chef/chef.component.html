@@ -62,9 +62,9 @@
   <a
   class="list-group-item"
   style="cursor: pointer"
-  *ngFor="let plato of platos; let i = index"
+  *ngFor="let orden of ordenes; let i = index"
   (click)="onEditItem(i)"
   >
-    {{plato.nombrePlato}} ({{plato.precio}})
+    {{orden.nombreCliente}} ({{orden.monto}})
 </a>
 </ul>

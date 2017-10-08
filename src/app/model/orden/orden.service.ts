@@ -6,6 +6,7 @@ import {Plato} from '../orden//plato/plato.model';
 @Injectable()
 export class OrdenService{
   ordenChanged = new Subject<Orden[]>();
+  startedEditing = new Subject<number>();
 
   private ordenes: Orden[] = [
     new Orden('Orden 1',
@@ -24,7 +25,7 @@ export class OrdenService{
 
   }
 
-  getordenes(){
+  getOrdenes(){
     return this.ordenes.slice();
   }
 
