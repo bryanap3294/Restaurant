@@ -30,6 +30,20 @@ export class CashierComponent implements OnInit {
     )
   }
 
+  onSubmit(){
+    console.log(this.ordenForm);
+    if (this.editMode){
+      this.ordenService.updateOrden(this.id, this.ordenForm.value)
+    } else{
+      this.ordenService.addOrden(this.ordenForm.value);
+    }
+    this.onCancel();
+  }
+
+  onCancel(){
+    this.router.navigate(['../'], {relativeTo: this.route})
+  }
+
   private initForm(){
     let ordenName = '';
     let ordenMonto;
@@ -60,6 +74,21 @@ export class CashierComponent implements OnInit {
     });
   }
 
+  onAddPlato(){
+    (<FormArray>this.ordenForm.get('platos')).push(
+      new FormGroup({
+        'nombrePlato': new FormControl(null, Validators.required),
+        'precio': new FormControl(null, [
+          Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*$/)
+        ])
+      })
+    )
+  }
+
+  onDeletePlato(index: number){
+    (<FormArray>this.ordenForm.get('platos')).removeAt(index);
+  }
 
 
 }

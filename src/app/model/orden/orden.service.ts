@@ -47,7 +47,7 @@ export class OrdenService{
     this.ordenChanged.next(this.ordenes.slice());
   }
 
-  setordenes(ordenes: Orden[]){
+  setOrdenes(ordenes: Orden[]){
     this.ordenes = ordenes;
     this.ordenChanged.next(this.ordenes.slice());
   }

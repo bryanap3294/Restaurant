@@ -4,6 +4,7 @@ import {HomeComponent} from './home/home.component';
 import {SharedModule} from '../shared/shared.module';
 import {AppRoutingModule} from '../app-routing.module';
 import {AuthService} from '../auth/auth.service';
+import {DataStorageService} from '../shared/data-storage.service';
 import { OrdenService } from '../model/orden/orden.service';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { OrdenService } from '../model/orden/orden.service';
   providers: [
     AuthService,
     OrdenService,
+    DataStorageService,
   ]
 })
 export class CoreModule{

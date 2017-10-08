@@ -11,9 +11,9 @@
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav navbar-left">
         <ng-template [ngIf]="authService.isAuthenticated()">
-          <li><a routerLinkActive="active" routerLink="/cashier">Cajero</a></li>
-          <li><a routerLinkActive="active" routerLink="/chef">Chef</a></li>
-          <li><a routerLinkActive="active" routerLink="/manager">Administrador</a></li>
+          <li><a routerLinkActive="active" routerLink="/rol/cashier">Cajero</a></li>
+          <li><a routerLinkActive="active" routerLink="/rol/chef">Chef</a></li>
+          <li><a routerLinkActive="active" routerLink="/rol/manager">Administrador</a></li>
         </ng-template>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -28,8 +28,8 @@
         <li class="dropdown" appDropdown *ngIf="authService.isAuthenticated()">
           <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a style="cursor: pointer;">Save Data</a></li>
-            <li><a style="cursor: pointer;">Fetch Data</a></li>
+            <li><a style="cursor: pointer;" (click)="onSaveData()">Save Data</a></li>
+            <li><a style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a></li>
           </ul>
         </li>
       </ul>
