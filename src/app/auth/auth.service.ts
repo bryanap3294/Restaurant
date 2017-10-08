@@ -13,7 +13,7 @@ export class AuthService{
   signupUser(email: string, password: string){
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .catch(
-      error => {console.log(error.toString()),
+      error => {console.log(error),
       this.error = error.toString();
       }
     )
@@ -31,7 +31,8 @@ export class AuthService{
       }
     )
     .catch(
-      error => console.log(error)
+      error => {console.log(error)
+      this.error = error.toString();}
     );
   }
 
