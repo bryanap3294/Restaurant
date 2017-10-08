@@ -4,6 +4,7 @@ import {HomeComponent} from './home/home.component';
 import {SharedModule} from '../shared/shared.module';
 import {AppRoutingModule} from '../app-routing.module';
 import {AuthService} from '../auth/auth.service';
+import { OrdenService } from '../model/orden/orden.service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {AuthService} from '../auth/auth.service';
     HeaderComponent
   ],
   providers: [
-    AuthService
+    AuthService,
+    OrdenService,
   ]
 })
 export class CoreModule{
