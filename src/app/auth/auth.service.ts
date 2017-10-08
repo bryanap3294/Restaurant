@@ -8,13 +8,14 @@ export class AuthService{
   constructor(private router: Router){
 
   }
-   error: string = '';
+   errorSignUp: string = '';
+   errorSignIn: string = '';
 
   signupUser(email: string, password: string){
     firebase.auth().createUserWithEmailAndPassword(email, password)
     .catch(
       error => {console.log(error),
-      this.error = error.toString();
+      this.errorSignUp = error.toString();
       }
     )
   }
@@ -32,7 +33,7 @@ export class AuthService{
     )
     .catch(
       error => {console.log(error)
-      this.error = error.toString();}
+      this.errorSignIn = error.toString();}
     );
   }
 
