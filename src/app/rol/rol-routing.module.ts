@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 import { CashierComponent } from './cashier/cashier.component';
 import { ManagerComponent } from './manager/manager.component';
@@ -7,9 +7,9 @@ import { ChefComponent } from './chef/chef.component';
 
 const rolRoutes: Routes = [
 
-  {path: 'cashier', component: CashierComponent},
-  {path: 'manager', component: ManagerComponent},
-  {path: 'chef', component: ChefComponent}
+  { path: 'cashier', component: CashierComponent },
+  { path: 'manager', component: ManagerComponent },
+  { path: 'chef', component: ChefComponent }
 ];
 
 @NgModule({
@@ -18,4 +18,4 @@ const rolRoutes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class RolRoutingModule {}
+export class RolRoutingModule { }

@@ -1,17 +1,18 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule, PreloadAllModules} from '@angular/router';
-import {HomeComponent} from './core/home/home.component';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { HomeComponent } from './core/home/home.component';
 
 const appRoutes: Routes = [
-  {path: '', component : HomeComponent}
+  { path: '', component: HomeComponent },
+  { path: 'rol', loadChildren: './rol/rol.module#RolModule' }
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes, {preloadingStrategy: PreloadAllModules})
+    RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule{
+export class AppRoutingModule {
 
 }
