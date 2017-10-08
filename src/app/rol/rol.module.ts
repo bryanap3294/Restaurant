@@ -8,12 +8,14 @@ import { ManagerComponent } from './manager/manager.component';
 import { ChefComponent } from './chef/chef.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { MaintenanceComponent } from './chef/maintenance/maintenance.component';
 
 @NgModule({
   declarations: [
     CashierComponent,
     ManagerComponent,
     ChefComponent,
+    MaintenanceComponent,
   ],
   imports: [
     CommonModule,
