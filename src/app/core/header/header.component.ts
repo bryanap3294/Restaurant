@@ -13,7 +13,8 @@ export class HeaderComponent {
     private authService : AuthService){}
 
   onSaveData(){
-    this.dataStorageService.storeOrdenes()
+    // this.dataStorageService.storeOrdenes()
+    this.dataStorageService.saveOrdenes()
     .subscribe(
       (response: Response) => {
         console.log(response);

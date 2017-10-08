@@ -37,7 +37,7 @@ export class CashierComponent implements OnInit {
     } else{
       this.ordenService.addOrden(this.ordenForm.value);
     }
-    this.onCancel();
+    // this.onCancel();
   }
 
   onCancel(){

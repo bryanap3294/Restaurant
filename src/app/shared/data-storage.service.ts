@@ -20,6 +20,13 @@ export class DataStorageService {
     .getordenes());
   }
 
+  saveOrdenes() {
+      const token = this.authService.getToken();
+
+      return this.http.post('https://restaurant-9ea70.firebaseio.com/restaurant.json?auth='+token, this.ordenService
+    .getordenes());
+  }
+
   getOrdenes(){
 
     const token = this.authService.getToken();
