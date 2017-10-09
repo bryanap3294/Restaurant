@@ -8,18 +8,19 @@ export class OrdenService{
   ordenChanged = new Subject<Orden[]>();
   startedEditing = new Subject<number>();
 
-  private ordenes: Orden[] = [
-    new Orden('Orden 1',
-    23,
-    [
-      new Plato('plato1',1)
-    ]),
-    new Orden('Orden 2',
-    23,
-    [
-      new Plato('plato2',2)
-    ])
-  ];
+  private ordenes: Orden[] = [];
+  // private ordenes: Orden[] = [
+  //   new Orden('Orden 4',
+  //   23,
+  //   [
+  //     new Plato('plato1',1)
+  //   ]),
+  //   new Orden('Orden 2',
+  //   23,
+  //   [
+  //     new Plato('plato2',2)
+  //   ])
+  // ];
 
   constructor(){
 

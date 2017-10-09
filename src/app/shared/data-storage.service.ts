@@ -15,16 +15,19 @@ export class DataStorageService {
 
   storeOrdenes() {
       const token = this.authService.getToken();
+      // let nombreCliente : String = '';
+      // nombreCliente = this.ordenService.getOrden(0).nombreCliente;
+      return this.http.put('https://restaurant-9ea70.firebaseio.com/orden/.json?auth='+token, this.ordenService
+      // return this.http.put('https://restaurant-9ea70.firebaseio.com/orden/'+nombreCliente+'/.json?auth='+token, this.ordenService
+      .getOrdenes());
 
-      return this.http.put('https://restaurant-9ea70.firebaseio.com/restaurant.json?auth='+token, this.ordenService
-    .getordenes());
   }
 
   saveOrdenes() {
       const token = this.authService.getToken();
 
       return this.http.post('https://restaurant-9ea70.firebaseio.com/restaurant.json?auth='+token, this.ordenService
-    .getordenes());
+    .getOrdenes());
   }
 
   getOrdenes(){
