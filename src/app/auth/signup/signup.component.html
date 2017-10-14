@@ -5,16 +5,16 @@
     <form (ngSubmit)="onSignup(f)" #f="ngForm">
       <div class="form-group">
         <label for="emalil">Mail</label>
-        <input type="email" id="email" name="email" ngModel class="form-control">
+        <input type="email" id="email" name="email" ngModel class="form-control" required>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" ngModel class="form-control">
+        <input type="password" id="password" name="password" ngModel class="form-control" required>
       </div>
       <div class="form-group">
         <p style="color:red;">{{authService.errorSignUp}}</p>
       </div>
-      <button type="submit" class="btn btn-primary">Sign Up</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Sign Up</button>
     </form>
   </div>
 </div>
