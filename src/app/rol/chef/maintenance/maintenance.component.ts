@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Response } from '@angular/http';
 
-import {NgForm} from '@angular/forms';
-import {PlatoService} from '../../../model/orden/plato/plato.service';
+import { NgForm } from '@angular/forms';
+import { PlatoService } from '../../../model/orden/plato/plato.service';
 import { Plato } from '../../../model/orden/plato/plato.model';
 import { DataStorageService } from '../../../shared/data-storage.service';
+import { AuthService } from '../../../auth/auth.service';
 
 @Component({
   selector: 'app-maintenance',
@@ -18,65 +20,75 @@ export class MaintenanceComponent implements OnInit {
   editMode = false;
   editedItemIndex: number;
   editedItem: Plato;
-
   platos: Plato[];
-  //private subscription: Subscription;
 
-
-  constructor(private platoService: PlatoService, private dataStorageService : DataStorageService) { }
+  constructor(private platoService: PlatoService, private dataStorageService: DataStorageService,
+              private authService: AuthService) { }
 
   ngOnInit() {
-    this.dataStorageService.getPlatos();
-    this.platos = this.platoService.getPlatos();
-    this.subscription =  this.platoService.platosChanged
-    .subscribe(
-      (platos: Plato[]) =>{
-        this.platos = platos;
-      }
-    );
+    if(this.authService.isAuthenticated()){
+      this.dataStorageService.getPlatos();
+      this.platos = this.platoService.getPlatos();
+      this.subscription = this.platoService.platosChanged
+        .subscribe(
+        (platos: Plato[]) => {
+          this.platos = platos;
+        }
+        );
+    }
+
 
     this.subscription = this.platoService.startedEditing
-    .subscribe(
-      (index:number) => {
+      .subscribe(
+      (index: number) => {
         this.editedItemIndex = index;
         this.editMode = true;
         this.editedItem = this.platoService.getPlato(index);
         this.slForm.setValue({
-            name: this.editedItem.nombrePlato,
-            amount: this.editedItem.precio
+          name: this.editedItem.nombrePlato,
+          amount: this.editedItem.precio
         })
       }
-    );
+      );
   }
 
-  onEditItem(index: number){
+  onEditItem(index: number) {
     this.platoService.startedEditing.next(index);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  onSubmit(form: NgForm){
+  onSubmit(form: NgForm) {
     const value = form.value;
     const newPlato = new Plato(value.name, value.amount);
-    if (this.editMode){
+    if (this.editMode) {
       this.platoService.updatePlato(this.editedItemIndex, newPlato);
-    } else{
+    } else {
       this.platoService.addPlato(newPlato);
     }
     this.editMode = false;
     form.reset();
   }
 
-  onClear(){
+  onClear() {
     this.slForm.reset()
     this.editMode = false;
   }
 
-  onDelete(){
+  onDelete() {
     this.platoService.deletePlato(this.editedItemIndex);
     this.onClear();
+  }
+
+  onSave() {
+    this.dataStorageService.savePlatos()
+      .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+      );
   }
 
 }
