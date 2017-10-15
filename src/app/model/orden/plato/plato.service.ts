@@ -5,8 +5,8 @@ export class PlatoService {
   platosChanged = new Subject<Plato[]>();
   startedEditing = new Subject<number>();
   private platos: Plato[] = [
-    new Plato('arros con pollo', 5),
-    new Plato('papa a la huanacaina', 10),
+    // new Plato('arros con pollo', 5),
+    // new Plato('papa a la huanacaina', 10),
   ];
 
   getPlatos(){
@@ -38,6 +38,11 @@ export class PlatoService {
   deletePlato(index: number) {
     this.platos.splice(index, 1);
     this.platosChanged.next(this.platos.slice());
+  }
+
+  setPlatos(platos: Plato[]){
+     this.platos = platos;
+     this.platosChanged.next(this.platos.slice());
   }
 
 }

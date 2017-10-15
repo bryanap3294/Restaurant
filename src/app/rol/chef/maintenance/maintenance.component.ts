@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import {NgForm} from '@angular/forms';
 import {PlatoService} from '../../../model/orden/plato/plato.service';
 import { Plato } from '../../../model/orden/plato/plato.model';
+import { DataStorageService } from '../../../shared/data-storage.service';
 
 @Component({
   selector: 'app-maintenance',
@@ -21,9 +22,11 @@ export class MaintenanceComponent implements OnInit {
   platos: Plato[];
   //private subscription: Subscription;
 
-  constructor(private platoService: PlatoService) { }
+
+  constructor(private platoService: PlatoService, private dataStorageService : DataStorageService) { }
 
   ngOnInit() {
+    this.dataStorageService.getPlatos();
     this.platos = this.platoService.getPlatos();
     this.subscription =  this.platoService.platosChanged
     .subscribe(
