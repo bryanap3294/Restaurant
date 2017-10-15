@@ -20,12 +20,11 @@ export class ChefComponent implements OnInit, OnDestroy {
   editedItem: Orden;
 
   ordenes: Orden[];
-  //private subscription: Subscription;
 
   constructor(private ordenService: OrdenService) { }
 
   ngOnInit() {
-    this.ordenes = this.ordenService.getOrdenes();
+    // this.ordenes = this.ordenService.getOrdenes();
     this.subscription =  this.ordenService.ordenChanged
     .subscribe(
       (ordenes: Orden[]) =>{

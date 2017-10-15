@@ -26,7 +26,7 @@ export class DataStorageService {
   saveOrdenes() {
       const token = this.authService.getToken();
 
-      return this.http.post('https://restaurant-9ea70.firebaseio.com/restaurant.json?auth='+token, this.ordenService
+      return this.http.post('https://restaurant-9ea70.firebaseio.com/orden.json?auth='+token, this.ordenService
     .getOrdenes());
   }
 
@@ -34,7 +34,7 @@ export class DataStorageService {
 
     const token = this.authService.getToken();
 
-    this.http.get('https://restaurant-9ea70.firebaseio.com/restaurant.json?auth='+token)
+    this.http.get('https://restaurant-9ea70.firebaseio.com/orden.json?auth='+token)
     .map(
       (response: Response) => {
         const ordenes: Orden[] = response.json();

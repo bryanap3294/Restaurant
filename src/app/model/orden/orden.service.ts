@@ -8,7 +8,7 @@ export class OrdenService{
   ordenChanged = new Subject<Orden[]>();
   startedEditing = new Subject<number>();
 
-  private ordenes: Orden[] = [];
+   private ordenes: Orden;
   // private ordenes: Orden[] = [
   //   new Orden('Orden 4',
   //   23,
@@ -27,7 +27,8 @@ export class OrdenService{
   }
 
   getOrdenes(){
-    return this.ordenes.slice();
+    return this.ordenes;
+    // return this.ordenes.slice();
   }
 
   getOrden(index: number) {
@@ -35,22 +36,23 @@ export class OrdenService{
   }
 
   addOrden(orden: Orden){
-    this.ordenes.push(orden);
-    this.ordenChanged.next(this.ordenes.slice());
+    this.ordenes = new Orden(orden.nombreCliente,orden.monto,[new Plato('plato1',1)])
+    // this.ordenes.push(orden);// https://www.w3schools.com/jsref/jsref_push.asp
+    // this.ordenChanged.next(this.ordenes.slice());
   }
 
   updateOrden(index: number, newOrden: Orden){
-    this.ordenes[index] = newOrden;
-    this.ordenChanged.next(this.ordenes.slice());
+    // this.ordenes[index] = newOrden;
+    // this.ordenChanged.next(this.ordenes.slice());
   }
 
   deleteOrden(index: number){
-    this.ordenes.splice(index, 1);
-    this.ordenChanged.next(this.ordenes.slice());
+    // this.ordenes.splice(index, 1);//https://www.w3schools.com/jsref/jsref_splice.asp
+    // this.ordenChanged.next(this.ordenes.slice());//https://www.w3schools.com/jsref/jsref_slice_array.asp
   }
 
   setOrdenes(ordenes: Orden[]){
-    this.ordenes = ordenes;
-    this.ordenChanged.next(this.ordenes.slice());
+    // this.ordenes = ordenes;
+    // this.ordenChanged.next(this.ordenes.slice());
   }
 }
