@@ -5,6 +5,8 @@ import {NgForm} from '@angular/forms';
 import {Orden} from '../../model/orden/orden.model';
 import {OrdenService} from '../../model/orden/orden.service';
 import { Plato } from '../../model/orden/plato/plato.model';
+import { AuthService } from '../../auth/auth.service';
+import { DataStorageService } from '../../shared/data-storage.service';
 
 
 @Component({
@@ -21,29 +23,36 @@ export class ChefComponent implements OnInit, OnDestroy {
 
   ordenes: Orden[];
 
-  constructor(private ordenService: OrdenService) { }
+  constructor(private ordenService: OrdenService,
+              private authService: AuthService,
+              private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
-    // this.ordenes = this.ordenService.getOrdenes();
-    this.subscription =  this.ordenService.ordenChanged
-    .subscribe(
-      (ordenes: Orden[]) =>{
-        this.ordenes = ordenes;
-      }
-    );
+    if(this.authService.isAuthenticated()){
+      this.dataStorageService.getOrdenes();
+      this.ordenes = this.ordenService.getOrdenes();
+      this.subscription = this.ordenService.ordenChanged
+        .subscribe(
+        (ordenes: Orden[]) => {
+          this.ordenes = ordenes;
+          console.log(this.ordenes);
+        }
+        );
+    }
+
 
     this.subscription = this.ordenService.startedEditing
-    .subscribe(
-      (index:number) => {
+      .subscribe(
+      (index: number) => {
         this.editedItemIndex = index;
         this.editMode = true;
         this.editedItem = this.ordenService.getOrden(index);
         this.slForm.setValue({
-            name: this.editedItem.nombreCliente,
-            amount: this.editedItem.monto
+          name: this.editedItem.nombreCliente,
+          amount: this.editedItem.monto
         })
       }
-    );
+      );
   }
 
   onEditItem(index: number){

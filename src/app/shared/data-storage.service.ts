@@ -71,19 +71,30 @@ export class DataStorageService {
     this.http.get('https://restaurant-9ea70.firebaseio.com/orden.json?auth='+token)
     .map(
       (response: Response) => {
-        const ordenes: Orden[] = response.json();
-        for (let orden of ordenes){
-          if(!orden['platos']){
-            console.log(orden);
-            orden['platos'] = [];
+        const ordenes: any[] = response.json();
+        const res : any[] = <any[]>Object.values(ordenes);
+        const or: Orden[]=[];
+
+        console.log("longitud: "+Object.keys(ordenes).length);
+        console.log("longitud: "+Object.keys(res).length);
+        for (let i in Object.values(ordenes)){
+          // if(!orden['platos']){
+          //   console.log(orden);
+          //   orden['platos'] = [];
+          // }
+          for(let j in res[i]){
+            or.push(res[i][j]);
+            console.log(or);
           }
         }
-        return ordenes;
+        return or;
       }
     )
     .subscribe(
       (ordenes: Orden[]) => {
-        this.ordenService.setOrdenes(ordenes);
+        const val: Orden[] = <Orden[]>Object.values(ordenes);
+        console.log(Object.values(ordenes));
+        this.ordenService.setOrdenes(val);
       }
     );
   }
