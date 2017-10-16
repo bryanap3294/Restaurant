@@ -14,19 +14,19 @@ export class HeaderComponent {
 
   onSaveData(){
     // this.dataStorageService.storeOrdenes()
-    
-    // this.dataStorageService.saveOrdenes()
-    // .subscribe(
-    //   (response: Response) => {
-    //     console.log(response);
-    //   }
-    // );
-    this.dataStorageService.savePlatos()
+
+    this.dataStorageService.saveOrdenes()
     .subscribe(
       (response: Response) => {
         console.log(response);
       }
     );
+    // this.dataStorageService.savePlatos()
+    // .subscribe(
+    //   (response: Response) => {
+    //     console.log(response);
+    //   }
+    // );
   }
 
   onFetchData(){

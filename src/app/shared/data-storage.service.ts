@@ -48,12 +48,6 @@ export class DataStorageService {
     .map(
       (response: Response) => {
         const platos: Plato[] = response.json();
-        // for (let plato of platos){
-        //   if(!plato['platos']){
-        //     console.log(plato);
-        //     plato['platos'] = [];
-        //   }
-        // }
         return platos;
       }
     )
@@ -74,9 +68,8 @@ export class DataStorageService {
         const ordenes: any[] = response.json();
         const res : any[] = <any[]>Object.values(ordenes);
         const or: Orden[]=[];
-
-        console.log("longitud: "+Object.keys(ordenes).length);
-        console.log("longitud: "+Object.keys(res).length);
+        // console.log("longitud: "+Object.keys(ordenes).length);
+        // console.log("longitud: "+Object.keys(res).length);
         for (let i in Object.values(ordenes)){
           // if(!orden['platos']){
           //   console.log(orden);
@@ -84,7 +77,7 @@ export class DataStorageService {
           // }
           for(let j in res[i]){
             or.push(res[i][j]);
-            console.log(or);
+            // console.log(or);
           }
         }
         return or;
@@ -93,7 +86,7 @@ export class DataStorageService {
     .subscribe(
       (ordenes: Orden[]) => {
         const val: Orden[] = <Orden[]>Object.values(ordenes);
-        console.log(Object.values(ordenes));
+        // console.log(Object.values(ordenes));
         this.ordenService.setOrdenes(val);
       }
     );
