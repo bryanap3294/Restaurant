@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {FormGroup, FormControl, FormArray, Validators} from '@angular/forms';
-import {OrdenService} from '../../model/orden/orden.service';
-import {Orden} from '../../model/orden/orden.model';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
+import { OrdenService } from '../../model/orden/orden.service';
+import { Orden } from '../../model/orden/orden.model';
 
 @Component({
   selector: 'app-cashier',
@@ -16,8 +16,8 @@ export class CashierComponent implements OnInit {
   ordenForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
-  private ordenService: OrdenService,
-  private router: Router) { }
+    private ordenService: OrdenService,
+    private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -30,34 +30,33 @@ export class CashierComponent implements OnInit {
     )
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.ordenForm);
-    if (this.editMode){
+    if (this.editMode) {
       this.ordenService.updateOrden(this.id, this.ordenForm.value)
-    } else{
+    } else {
       this.ordenService.addOrden(this.ordenForm.value);
     }
-    // this.onCancel();
   }
 
-  onCancel(){
-    this.router.navigate(['../'], {relativeTo: this.route})
+  onCancel() {
+    this.router.navigate(['../'], { relativeTo: this.route })
   }
 
-  private initForm(){
+  private initForm() {
     let ordenName = '';
     let ordenMonto;
     let ordenPlatos = new FormArray([]);
 
-    if(this.editMode){
-      const orden= this.ordenService.getOrden(this.id);
+    if (this.editMode) {
+      const orden = this.ordenService.getOrden(this.id);
       ordenName = orden.nombreCliente;
       ordenMonto = orden.monto;
-      if (orden['platos']){
-        for(let plato of orden.platos){
+      if (orden['platos']) {
+        for (let plato of orden.platos) {
           ordenPlatos.push(
             new FormGroup({
-              'nombrePlato' : new FormControl(plato.nombrePlato, Validators.required),
+              'nombrePlato': new FormControl(plato.nombrePlato, Validators.required),
               'precio': new FormControl(plato.precio, [
                 Validators.required,
                 Validators.pattern(/^[1-9]+[0-9]*$/)
@@ -68,13 +67,13 @@ export class CashierComponent implements OnInit {
       }
     }
     this.ordenForm = new FormGroup({
-      'nombreCliente' : new FormControl(ordenName, Validators.required),
+      'nombreCliente': new FormControl(ordenName, Validators.required),
       'monto': new FormControl(ordenMonto, Validators.required),
       'platos': ordenPlatos
     });
   }
 
-  onAddPlato(){
+  onAddPlato() {
     (<FormArray>this.ordenForm.get('platos')).push(
       new FormGroup({
         'nombrePlato': new FormControl(null, Validators.required),
@@ -86,9 +85,8 @@ export class CashierComponent implements OnInit {
     )
   }
 
-  onDeletePlato(index: number){
+  onDeletePlato(index: number) {
     (<FormArray>this.ordenForm.get('platos')).removeAt(index);
   }
-
 
 }

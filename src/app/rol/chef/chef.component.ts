@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
-import {NgForm} from '@angular/forms';
-import {Orden} from '../../model/orden/orden.model';
-import {OrdenService} from '../../model/orden/orden.service';
+import { NgForm } from '@angular/forms';
+import { Orden } from '../../model/orden/orden.model';
+import { OrdenService } from '../../model/orden/orden.service';
 import { Plato } from '../../model/orden/plato/plato.model';
 import { AuthService } from '../../auth/auth.service';
 import { DataStorageService } from '../../shared/data-storage.service';
@@ -24,23 +24,20 @@ export class ChefComponent implements OnInit, OnDestroy {
   ordenes: Orden[];
 
   constructor(private ordenService: OrdenService,
-              private authService: AuthService,
-              private dataStorageService: DataStorageService) { }
+    private authService: AuthService,
+    private dataStorageService: DataStorageService) { }
 
   ngOnInit() {
-    if(this.authService.isAuthenticated()){
+    if (this.authService.isAuthenticated()) {
       this.dataStorageService.getOrdenes();
       this.ordenes = this.ordenService.getOrdenes();
       this.subscription = this.ordenService.ordenChanged
         .subscribe(
         (ordenes: Orden[]) => {
           this.ordenes = ordenes;
-          console.log(this.ordenes);
         }
         );
     }
-
-
     this.subscription = this.ordenService.startedEditing
       .subscribe(
       (index: number) => {
@@ -55,32 +52,32 @@ export class ChefComponent implements OnInit, OnDestroy {
       );
   }
 
-  onEditItem(index: number){
+  onEditItem(index: number) {
     this.ordenService.startedEditing.next(index);
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.subscription.unsubscribe();
   }
 
-  onSubmit(form: NgForm){
+  onSubmit(form: NgForm) {
     const value = form.value;
     const newOrden = new Orden(value.name, value.amount, [new Plato('arros', 23)]);
-    if (this.editMode){
+    if (this.editMode) {
       this.ordenService.updateOrden(this.editedItemIndex, newOrden);
-    } else{
-      this.ordenService.addOrden(newOrden);
+    } else {
+      this.ordenService.addNewOrden(newOrden);
     }
     this.editMode = false;
     form.reset();
   }
 
-  onClear(){
+  onClear() {
     this.slForm.reset()
     this.editMode = false;
   }
 
-  onDelete(){
+  onDelete() {
     this.ordenService.deleteOrden(this.editedItemIndex);
     this.onClear();
   }
