@@ -3,6 +3,11 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { OrdenService } from '../../model/orden/orden.service';
 import { Orden } from '../../model/orden/orden.model';
+import { DataStorageService } from '../../shared/data-storage.service';
+import { AuthService } from '../../auth/auth.service';
+import { Plato } from '../../model/orden/plato/plato.model';
+import { PlatoService } from '../../model/orden/plato/plato.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-cashier',
@@ -14,10 +19,16 @@ export class CashierComponent implements OnInit {
   id: number;
   editMode = false;
   ordenForm: FormGroup;
+  platos: Plato[];
+  subscription: Subscription;
+  platoSeleccionado: false;
 
   constructor(private route: ActivatedRoute,
     private ordenService: OrdenService,
-    private router: Router) { }
+    private router: Router,
+    private dataStorageService: DataStorageService,
+    private authService: AuthService,
+    private platoService: PlatoService) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -28,6 +39,20 @@ export class CashierComponent implements OnInit {
         console.log(this.editMode);
       }
     )
+
+    if(this.authService.isAuthenticated()){
+      this.dataStorageService.getPlatos();
+      this.platos = this.platoService.getPlatos();
+      this.subscription = this.platoService.platosChanged
+        .subscribe(
+        (platos: Plato[]) => {
+          this.platos = platos;
+        }
+        );
+    }
+
+
+
   }
 
   onSubmit() {

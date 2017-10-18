@@ -8,10 +8,13 @@
             <div class="col-xs-12" formArrayName="platos">
               <div class="row" *ngFor="let platoCtrl of ordenForm.get('platos').controls; let i = index" [formGroupName]="i" style="margin-top: 10px;">
                 <div class="col-xs-8">
-                  <input type="text" class="form-control" formControlName="nombrePlato">
+                  <!-- <input type="text" class="form-control" formControlName="nombrePlato" required> -->
+                  <select class="form-control" formControlName="nombrePlato" required>
+                    <option *ngFor="let plato of platos; let i = index" value="{{plato.nombrePlato}}">{{plato.nombrePlato}}</option>
+                  </select>
                 </div>
                 <div class="col-xs-2">
-                  <input type="number" class="form-control" formControlName="precio">
+                  <input type="number" class="form-control" formControlName="precio" required>
                 </div>
                 <div class="col-xs-2">
                   <button type="button" class="btn btn-danger" (click)="onDeletePlato(i)">X</button>
@@ -31,7 +34,7 @@
           <div class="col-xs-8">
             <div class="form-group">
               <label for="name">Nombre del Cliente</label>
-              <input type="text" id="nombreCliente" class="form-control" formControlName="nombreCliente">
+              <input type="text" id="nombreCliente" class="form-control" formControlName="nombreCliente" required>
             </div>
           </div>
         </div>
@@ -39,13 +42,13 @@
           <div class="col-xs-8">
             <div class="form-group">
               <label for="monto">Monto</label>
-              <input type="text" id="monto" class="form-control" formControlName="monto">
+              <input type="text" id="monto" class="form-control" formControlName="monto" required>
             </div>
           </div>
         </div>
         <div class="row">
           <div class="col-xs-8">
-            <button type="submit" class="btn btn-success">Save</button>
+            <button type="submit" class="btn btn-success" [disabled]="!ordenForm.valid && !nombrePlato">Save</button>
             <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
           </div>
         </div>
