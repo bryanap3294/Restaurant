@@ -7,6 +7,7 @@ import {AuthService} from '../auth/auth.service';
 import {DataStorageService} from '../shared/data-storage.service';
 import { OrdenService } from '../model/orden/orden.service';
 import { PlatoService } from '../model/orden/plato/plato.service';
+import { CollapseModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PlatoService } from '../model/orden/plato/plato.service';
   ],
   imports: [
     SharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CollapseModule,
   ],
   exports: [
     AppRoutingModule,

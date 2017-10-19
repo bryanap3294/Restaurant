@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-    <div class="collapse navbar-collapse" id="navbar">
+    <div class="collapse navbar-collapse" id="myNavbar" [collapse]="isCollapsed">
       <ul class="nav navbar-nav navbar-left">
         <ng-template [ngIf]="authService.isAuthenticated()">
           <li><a routerLinkActive="active" routerLink="/rol/cashier">Cajero</a></li>

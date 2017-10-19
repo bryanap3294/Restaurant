@@ -12,6 +12,8 @@ export class HeaderComponent {
   constructor( private dataStorageService: DataStorageService,
     private authService : AuthService){}
 
+  isCollapsed = true;
+
   onSaveData(){
     // this.dataStorageService.storeOrdenes()
 
