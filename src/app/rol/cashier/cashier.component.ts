@@ -51,7 +51,15 @@ export class CashierComponent implements OnInit {
         );
     }
 
-
+    (<FormArray>this.ordenForm.get('platos')).push(
+      new FormGroup({
+        'nombrePlato': new FormControl(null, Validators.required),
+        'precio': new FormControl(null, [
+          Validators.required,
+          Validators.pattern(/^[1-9]+[0-9]*$/)
+        ])
+      })
+    )
 
   }
 
