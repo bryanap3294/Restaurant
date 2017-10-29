@@ -72,7 +72,7 @@
          <td>{{orden.nombreCliente}}</td>
          <td>{{orden.monto}}</td>
          <!-- <td>{{orden.platos[0].nombrePlato}}</td> -->
-         <td><tr *ngFor="let plato of orden.platos; let i = index;">{{plato.nombrePlato}}</tr></td>
+         <td><tr *ngFor="let plato of orden.platos; let i = index;">{{plato.plato.nombrePlato}}</tr></td>
        </tr>
      </tbody>
    </table>

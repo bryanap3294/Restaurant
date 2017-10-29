@@ -9,7 +9,7 @@
               <div class="row" *ngFor="let platoCtrl of ordenForm.get('platos').controls; let i = index" [formGroupName]="i" style="margin-top: 10px;">
                 <div class="col-xs-8">
                   <select class="form-control" formControlName="plato" required>
-                    <option *ngFor="let plato of platos; let id = index" [ngValue]="id">{{plato.nombrePlato}} - S/{{plato.precio}}</option>
+                    <option *ngFor="let plato of platos; let id = index" [ngValue]="plato">{{plato.nombrePlato}} - S/{{plato.precio}}</option>
                   </select>
 
                 </div>

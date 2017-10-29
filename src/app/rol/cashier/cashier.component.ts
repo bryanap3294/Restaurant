@@ -110,7 +110,7 @@ export class CashierComponent implements OnInit {
   getMonto(){
     this.ordenMonto = 0;
     for(let  k of  (<FormArray>this.ordenForm.get('platos')).value){
-      this.ordenMonto += this.platos[k.plato].precio*(k.cantidad);
+      this.ordenMonto += k.plato['precio']*(k.cantidad);
     }
     this.ordenForm.get('monto').setValue(this.ordenMonto);
     return this.ordenMonto;
