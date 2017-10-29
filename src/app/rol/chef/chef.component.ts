@@ -62,7 +62,7 @@ export class ChefComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newOrden = new Orden(value.name, value.amount, [new Plato('arros', 23)]);
+    const newOrden = new Orden(value.name, value.amount, 1, [new Plato('arros', 23)]);
     if (this.editMode) {
       this.ordenService.updateOrden(this.editedItemIndex, newOrden);
     } else {

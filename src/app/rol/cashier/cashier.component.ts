@@ -8,6 +8,7 @@ import { AuthService } from '../../auth/auth.service';
 import { Plato } from '../../model/orden/plato/plato.model';
 import { PlatoService } from '../../model/orden/plato/plato.service';
 import { Subscription } from 'rxjs/Subscription';
+import {Response} from '@angular/http';
 
 @Component({
   selector: 'app-cashier',
@@ -73,6 +74,12 @@ export class CashierComponent implements OnInit {
     } else {
       this.ordenService.addOrden(this.ordenForm.value);
     }
+    this.dataStorageService.saveOrdenes()
+    .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+    );
   }
 
   onCancel() {

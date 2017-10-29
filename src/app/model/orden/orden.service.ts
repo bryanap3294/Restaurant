@@ -35,7 +35,7 @@ export class OrdenService {
   }
 
   addOrden(orden: Orden) {
-    this.orden = new Orden(orden.nombreCliente, orden.monto, orden.platos);
+    this.orden = new Orden(orden.nombreCliente, orden.monto, 1, orden.platos);
   }
 
   addNewOrden(orden: Orden) {
