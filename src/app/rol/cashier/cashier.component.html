@@ -8,9 +8,7 @@
             <div class="col-xs-12" formArrayName="platos">
               <div class="row" *ngFor="let platoCtrl of ordenForm.get('platos').controls; let i = index" [formGroupName]="i" style="margin-top: 10px;">
                 <div class="col-xs-8">
-                  <!-- <span>{{platoCtrl[1].nombrePlato}}</span> -->
-                  <!-- <input type="text" class="form-control" formControlName="nombrePlato" required> -->
-                  <select class="form-control"  (ngModelChange)="onSelect($event)" formControlName="plato" required>
+                  <select class="form-control" formControlName="plato" required>
                     <option *ngFor="let plato of platos; let id = index" [ngValue]="id">{{plato.nombrePlato}} - S/{{plato.precio}}</option>
                   </select>
 
@@ -44,16 +42,13 @@
         </div>
         <div class="row">
           <div class="col-xs-8">
-            <!-- <div class="col-xs-12"> -->
               <div class="form-group">
-                <!-- <label for="monto">Monto</label> -->
                 <div class="col-xs-2">
                   <button type="button" class="btn btn-primary" [disabled]="!ordenForm.valid" (click)="getMonto()">Monto</button>
                 </div>
                 <div class="col-xs-6">
                   <input type="number" id="monto" class="form-control" formControlName="monto" required>
                 </div>
-              <!-- </div> -->
             </div>
           </div>
         </div>

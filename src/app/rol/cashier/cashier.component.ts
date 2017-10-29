@@ -23,10 +23,6 @@ export class CashierComponent implements OnInit {
   subscription: Subscription;
   platoSeleccionado: false;
   ordenMonto = 0;
-  idPlato: number;
-  cantidadPlato: number;
-  montoArray: any[]= [];
-  bandera = 0;
 
   constructor(private route: ActivatedRoute,
     private ordenService: OrdenService,
@@ -109,32 +105,12 @@ export class CashierComponent implements OnInit {
     (<FormArray>this.ordenForm.get('platos')).removeAt(index);
   }
 
-  onSelect(platoSelected){
-    console.log("bayaaaaa");
-    // console.log(this.ordenForm.value);
-    console.log(platoSelected);
-    this.idPlato = platoSelected;
-    console.log(this.idPlato);
-    // this.montoArray.push(this.idPlato);
-    // console.log(this.montoArray);
-    // this.ordenMonto = this.ordenMonto;
-  }
-
   getMonto(){
-
-    // <FormArray>this.ordenForm.get('platos');
-var orf = 0;
+    this.ordenMonto = 0;
     for(let  k of  (<FormArray>this.ordenForm.get('platos')).value){
-      // this.bandera = this.platos[k.plato].precio;
-      orf += this.platos[k.plato].precio*(k.cantidad);
-      console.log(<FormArray>this.ordenForm.get('platos').value);
-      console.log(this.platos[k.plato].precio);
-      console.log(k.plato);
-      console.log(k.cantidad);
+      this.ordenMonto += this.platos[k.plato].precio*(k.cantidad);
+      console.log(this.ordenMonto);
     }
-    console.log(orf);
-    // var el = (<HTMLInputElement>document.getElementById('cantidad')).value;
-
     return this.ordenMonto;
   }
 
