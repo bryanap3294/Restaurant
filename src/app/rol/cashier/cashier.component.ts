@@ -22,6 +22,11 @@ export class CashierComponent implements OnInit {
   platos: Plato[];
   subscription: Subscription;
   platoSeleccionado: false;
+  ordenMonto = 0;
+  idPlato: number;
+  cantidadPlato: number;
+  montoArray: any[]= [];
+  bandera = 0;
 
   constructor(private route: ActivatedRoute,
     private ordenService: OrdenService,
@@ -53,8 +58,8 @@ export class CashierComponent implements OnInit {
 
     (<FormArray>this.ordenForm.get('platos')).push(
       new FormGroup({
-        'nombrePlato': new FormControl(null, Validators.required),
-        'precio': new FormControl(null, [
+        'plato': new FormControl(null, Validators.required),
+        'cantidad': new FormControl(null, [
           Validators.required,
           Validators.pattern(/^[1-9]+[0-9]*$/)
         ])
@@ -78,30 +83,12 @@ export class CashierComponent implements OnInit {
 
   private initForm() {
     let ordenName = '';
-    let ordenMonto;
+
     let ordenPlatos = new FormArray([]);
 
-    if (this.editMode) {
-      const orden = this.ordenService.getOrden(this.id);
-      ordenName = orden.nombreCliente;
-      ordenMonto = orden.monto;
-      if (orden['platos']) {
-        for (let plato of orden.platos) {
-          ordenPlatos.push(
-            new FormGroup({
-              'nombrePlato': new FormControl(plato.nombrePlato, Validators.required),
-              'precio': new FormControl(plato.precio, [
-                Validators.required,
-                Validators.pattern(/^[1-9]+[0-9]*$/)
-              ])
-            })
-          );
-        }
-      }
-    }
     this.ordenForm = new FormGroup({
       'nombreCliente': new FormControl(ordenName, Validators.required),
-      'monto': new FormControl(ordenMonto, Validators.required),
+      'monto': new FormControl(this.ordenMonto, Validators.required),
       'platos': ordenPlatos
     });
   }
@@ -109,8 +96,8 @@ export class CashierComponent implements OnInit {
   onAddPlato() {
     (<FormArray>this.ordenForm.get('platos')).push(
       new FormGroup({
-        'nombrePlato': new FormControl(null, Validators.required),
-        'precio': new FormControl(null, [
+        'plato': new FormControl(null, Validators.required),
+        'cantidad': new FormControl(null, [
           Validators.required,
           Validators.pattern(/^[1-9]+[0-9]*$/)
         ])
@@ -120,6 +107,35 @@ export class CashierComponent implements OnInit {
 
   onDeletePlato(index: number) {
     (<FormArray>this.ordenForm.get('platos')).removeAt(index);
+  }
+
+  onSelect(platoSelected){
+    console.log("bayaaaaa");
+    // console.log(this.ordenForm.value);
+    console.log(platoSelected);
+    this.idPlato = platoSelected;
+    console.log(this.idPlato);
+    // this.montoArray.push(this.idPlato);
+    // console.log(this.montoArray);
+    // this.ordenMonto = this.ordenMonto;
+  }
+
+  getMonto(){
+
+    // <FormArray>this.ordenForm.get('platos');
+var orf = 0;
+    for(let  k of  (<FormArray>this.ordenForm.get('platos')).value){
+      // this.bandera = this.platos[k.plato].precio;
+      orf += this.platos[k.plato].precio*(k.cantidad);
+      console.log(<FormArray>this.ordenForm.get('platos').value);
+      console.log(this.platos[k.plato].precio);
+      console.log(k.plato);
+      console.log(k.cantidad);
+    }
+    console.log(orf);
+    // var el = (<HTMLInputElement>document.getElementById('cantidad')).value;
+
+    return this.ordenMonto;
   }
 
 }
