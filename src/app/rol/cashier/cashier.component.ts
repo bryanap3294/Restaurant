@@ -22,7 +22,7 @@ export class CashierComponent implements OnInit {
   platos: Plato[];
   subscription: Subscription;
   platoSeleccionado: false;
-  ordenMonto = 0;
+  ordenMonto;
 
   constructor(private route: ActivatedRoute,
     private ordenService: OrdenService,
@@ -65,7 +65,9 @@ export class CashierComponent implements OnInit {
   }
 
   onSubmit() {
+    this.getMonto();
     console.log(this.ordenForm);
+
     if (this.editMode) {
       this.ordenService.updateOrden(this.id, this.ordenForm.value)
     } else {
@@ -84,7 +86,7 @@ export class CashierComponent implements OnInit {
 
     this.ordenForm = new FormGroup({
       'nombreCliente': new FormControl(ordenName, Validators.required),
-      'monto': new FormControl(this.ordenMonto, Validators.required),
+      'monto': new FormControl({value: this.ordenMonto}, Validators.required),
       'platos': ordenPlatos
     });
   }
@@ -109,8 +111,8 @@ export class CashierComponent implements OnInit {
     this.ordenMonto = 0;
     for(let  k of  (<FormArray>this.ordenForm.get('platos')).value){
       this.ordenMonto += this.platos[k.plato].precio*(k.cantidad);
-      console.log(this.ordenMonto);
     }
+    this.ordenForm.get('monto').setValue(this.ordenMonto);
     return this.ordenMonto;
   }
 

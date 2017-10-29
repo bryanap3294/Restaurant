@@ -47,7 +47,7 @@
                   <button type="button" class="btn btn-primary" [disabled]="!ordenForm.valid" (click)="getMonto()">Monto</button>
                 </div>
                 <div class="col-xs-6">
-                  <input type="number" id="monto" class="form-control" formControlName="monto" required>
+                  <input type="number" id="monto" class="form-control" formControlName="monto" required [attr.disabled]="true">
                 </div>
             </div>
           </div>
