@@ -46,7 +46,9 @@ export class ChefComponent implements OnInit, OnDestroy {
         this.editedItem = this.ordenService.getOrden(index);
         this.slForm.setValue({
           name: this.editedItem.nombreCliente,
-          amount: this.editedItem.monto
+          monto: this.editedItem.monto,
+          estado: this.editedItem.estado,
+          platos: this.editedItem.platos
         })
       }
       );
@@ -62,7 +64,8 @@ export class ChefComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     const value = form.value;
-    const newOrden = new Orden(value.name, value.amount, 1, [new Plato('arros', 23)]);
+    console.log(value);
+    const newOrden = new Orden(value.name, value.monto, value.estado, value.platos);
     if (this.editMode) {
       this.ordenService.updateOrden(this.editedItemIndex, newOrden);
     } else {

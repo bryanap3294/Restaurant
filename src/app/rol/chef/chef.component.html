@@ -17,7 +17,7 @@
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div class="row">
         <div class="col-sm-5 form-group">
-          <label for="name">Nombre del Plato</label>
+          <label for="name">Nombre del Cliente</label>
           <input
           type="text"
           id="name"
@@ -28,15 +28,40 @@
           >
         </div>
         <div class="col-sm-2 form-group">
-          <label for="amount">Precio</label>
+          <label for="estado">Estado</label>
           <input
           type="number"
-          id="amount"
+          id="estado"
           class="form-control"
-          name="amount"
+          name="estado"
+          ngModel
+          required
+          pattern="^[1-3]+[0-3]*$"
+          >
+        </div>
+        <div class="col-sm-2 form-group">
+            <label for="amount">Monto</label>
+          <input
+          type="number"
+          id="monto"
+          class="form-control"
+          name="monto"
           ngModel
           required
           pattern="^[1-9]+[0-9]*$"
+          [attr.disabled]="true"
+          >
+        </div>
+        <div class="col-sm-2 form-group">
+          <label for="platos">Platos</label>
+          <input
+          type="text"
+          id="platos"
+          class="form-control"
+          name="platos"
+          ngModel
+          required
+          [attr.disabled]="true"
           >
         </div>
       </div>
@@ -63,28 +88,16 @@
      <thead>
        <tr>
          <th>Nombre del Cliente</th>
-         <th>Monto</th>
+         <th>Estado</th>
          <th>Platos</th>
        </tr>
      </thead>
      <tbody>
-       <tr *ngFor="let orden of ordenes; let i = index;" (click)="onEditItem(i)">
+       <tr *ngFor="let orden of ordenes; let id = index;" (click)="onEditItem(id)">
          <td>{{orden.nombreCliente}}</td>
-         <td>{{orden.monto}}</td>
-         <!-- <td>{{orden.platos[0].nombrePlato}}</td> -->
+         <td>{{orden.estado}}</td>
          <td><tr *ngFor="let plato of orden.platos; let i = index;">{{plato.plato.nombrePlato}}</tr></td>
        </tr>
      </tbody>
    </table>
 </div>
-
-<!-- <ul class="list-group">
-  <a
-  class="list-group-item"
-  style="cursor: pointer"
-  *ngFor="let orden of ordenes; let i = index"
-  (click)="onEditItem(i)"
-  >
-    {{orden.nombreCliente}} ({{orden.monto}})
-</a>
-</ul> -->
