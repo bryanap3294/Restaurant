@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import { Response } from '@angular/http';
 
 import { NgForm } from '@angular/forms';
 import { Orden } from '../../model/orden/orden.model';
@@ -73,6 +74,12 @@ export class ChefComponent implements OnInit, OnDestroy {
     }
     this.editMode = false;
     form.reset();
+    this.dataStorageService.storeOrdenes()
+      .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+      );
   }
 
   onClear() {
@@ -83,6 +90,10 @@ export class ChefComponent implements OnInit, OnDestroy {
   onDelete() {
     this.ordenService.deleteOrden(this.editedItemIndex);
     this.onClear();
+  }
+
+  onSave() {
+
   }
 
 }
