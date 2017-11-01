@@ -9,6 +9,7 @@ import { ChefComponent } from './chef/chef.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { MaintenanceComponent } from './chef/maintenance/maintenance.component';
+import { EstadoPipe } from '../pipes/estado.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { MaintenanceComponent } from './chef/maintenance/maintenance.component';
     ManagerComponent,
     ChefComponent,
     MaintenanceComponent,
+    EstadoPipe
   ],
   imports: [
     CommonModule,

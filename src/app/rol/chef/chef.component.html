@@ -95,7 +95,7 @@
      <tbody>
        <tr *ngFor="let orden of ordenes; let id = index;" (click)="onEditItem(id)">
          <td>{{orden.nombreCliente}}</td>
-         <td>{{orden.estado}}</td>
+         <td>{{orden.estado | estado}}</td>
          <td><tr *ngFor="let plato of orden.platos; let i = index;">{{plato.plato.nombrePlato}}</tr></td>
        </tr>
      </tbody>
