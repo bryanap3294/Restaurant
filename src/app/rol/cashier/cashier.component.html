@@ -1,17 +1,26 @@
 <div class="row">
+  <div class="form-group">
+    <div class="col-xs-8">
+      <h1>Registrar Orden</h1>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
   <div class="col-xs-12">
     <form [formGroup]="ordenForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="row">
           <div class="col-xs-12">
-            <label for="plato">Plato</label>
+            <div class="col-xs-12">
+              <label for="plato">Plato</label>
+            </div>
             <div class="col-xs-12" formArrayName="platos">
               <div class="row" *ngFor="let platoCtrl of ordenForm.get('platos').controls; let i = index" [formGroupName]="i" style="margin-top: 10px;">
                 <div class="col-xs-8">
                   <select class="form-control" formControlName="plato" required>
                     <option *ngFor="let plato of platos; let id = index" [ngValue]="plato">{{plato.nombrePlato}} - S/{{plato.precio}}</option>
                   </select>
-
                 </div>
                 <div class="col-xs-2">
                   <input type="number" class="form-control" id="cantidad" formControlName="cantidad" required>
