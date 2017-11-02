@@ -35,10 +35,7 @@ export class CashierComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(
       (params: Params) => {
-        this.id = +params['id'];
-        this.editMode = params['id'] != null;
         this.initForm();
-        console.log(this.editMode);
       }
     )
 
@@ -68,12 +65,7 @@ export class CashierComponent implements OnInit {
   onSubmit() {
     this.getMonto();
     console.log(this.ordenForm);
-
-    if (this.editMode) {
-      this.ordenService.updateOrden(this.id, this.ordenForm.value)
-    } else {
-      this.ordenService.addOrden(this.ordenForm.value);
-    }
+    this.ordenService.addOrden(this.ordenForm.value);
     this.dataStorageService.saveOrdenes()
     .subscribe(
       (response: Response) => {
