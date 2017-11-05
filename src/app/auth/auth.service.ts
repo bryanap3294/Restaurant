@@ -10,9 +10,16 @@ export class AuthService{
   }
    errorSignUp: string = '';
    errorSignIn: string = '';
+   mensaje: string = '';
 
   signupUser(email: string, password: string){
-    firebase.auth().createUserWithEmailAndPassword(email, password)
+    firebase.auth().createUserWithEmailAndPassword(email, password).then(
+      response => {
+        this.mensaje = 'Su usuario se generó correctamente, se le está enviando un mensaje a su direccion de correo para verificar su cuenta.';
+        console.log(firebase.auth().currentUser);
+        firebase.auth().currentUser.sendEmailVerification();
+      }
+    )
     .catch(
       error => {console.log(error),
       this.errorSignUp = error.toString();
@@ -28,7 +35,7 @@ export class AuthService{
         firebase.auth().currentUser.getToken()
         .then(
           (token: string) => this.token = token
-        )
+        );
       }
     )
     .catch(
