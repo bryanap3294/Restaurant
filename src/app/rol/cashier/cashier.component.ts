@@ -24,6 +24,7 @@ export class CashierComponent implements OnInit {
   subscription: Subscription;
   platoSeleccionado: false;
   ordenMonto;
+  ordenRegistrada=false;
 
   constructor(private route: ActivatedRoute,
     private ordenService: OrdenService,
@@ -70,6 +71,7 @@ export class CashierComponent implements OnInit {
     .subscribe(
       (response: Response) => {
         console.log(response);
+        this.ordenRegistrada=true;
       }
     );
   }
