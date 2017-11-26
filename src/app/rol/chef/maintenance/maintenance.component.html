@@ -22,7 +22,7 @@
             <input
             type="text"
             id="name"
-            class="form-control"
+            class="form-control formStyle"
             name="name"
             ngModel
             required
@@ -33,7 +33,7 @@
             <input
             type="number"
             id="amount"
-            class="form-control"
+            class="form-control formStyle"
             name="amount"
             ngModel
             required
@@ -66,8 +66,8 @@
   <hr>
   <ul class="list-group">
     <a
-    class="list-group-item"
-    style="cursor: pointer"
+    class="list-group-item formStyle"
+    style="cursor: pointer;"
     *ngFor="let plato of platos; let i = index"
     (click)="onEditItem(i)"
     >

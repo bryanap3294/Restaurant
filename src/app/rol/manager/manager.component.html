@@ -17,7 +17,7 @@
          </tr>
        </thead>
        <tbody>
-         <tr *ngFor="let orden of ordenes; let id = index;" [ngClass]="{'success': orden.estado===3, 'info': orden.estado===2, 'warning': orden.estado===1}">
+         <tr style="color: black" *ngFor="let orden of ordenes; let id = index;" [ngClass]="{'success': orden.estado===3, 'info': orden.estado===2, 'warning': orden.estado===1}">
            <td>{{orden.nombreCliente}}</td>
            <td>{{orden.estado | estado}}</td>
            <td><tr *ngFor="let plato of orden.platos; let i = index;">{{plato.plato.nombrePlato}}</tr></td>
