@@ -1,26 +1,28 @@
-<div class="row">
-  <div class="form-group">
-    <div class="col-xs-8">
-      <h1>Estado de las Ordenes</h1>
+<div class="well" style="background-color: rgba(255,255,255,0.05); color:white;">
+  <div class="row">
+    <div class="form-group">
+      <div class="col-xs-8">
+        <h1>Estado de las Ordenes</h1>
+      </div>
     </div>
   </div>
-</div>
-<hr>
-<div class="table-responsive">
-  <table class="table table-hover">
-     <thead>
-       <tr>
-         <th>Nombre del Cliente</th>
-         <th>Estado</th>
-         <th>Platos</th>
-       </tr>
-     </thead>
-     <tbody>
-       <tr *ngFor="let orden of ordenes; let id = index;" [ngClass]="{'success': orden.estado===3, 'info': orden.estado===2, 'warning': orden.estado===1}">
-         <td>{{orden.nombreCliente}}</td>
-         <td>{{orden.estado | estado}}</td>
-         <td><tr *ngFor="let plato of orden.platos; let i = index;">{{plato.plato.nombrePlato}}</tr></td>
-       </tr>
-     </tbody>
-   </table>
+  <hr>
+  <div class="table-responsive">
+    <table class="table table-hover">
+       <thead>
+         <tr>
+           <th>Nombre del Cliente</th>
+           <th>Estado</th>
+           <th>Platos</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr *ngFor="let orden of ordenes; let id = index;" [ngClass]="{'success': orden.estado===3, 'info': orden.estado===2, 'warning': orden.estado===1}">
+           <td>{{orden.nombreCliente}}</td>
+           <td>{{orden.estado | estado}}</td>
+           <td><tr *ngFor="let plato of orden.platos; let i = index;">{{plato.plato.nombrePlato}}</tr></td>
+         </tr>
+       </tbody>
+     </table>
+  </div>
 </div>

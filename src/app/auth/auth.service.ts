@@ -8,14 +8,16 @@ export class AuthService{
   constructor(private router: Router){
 
   }
-   errorSignUp: boolean;
+   responseSignUp: boolean;
    errorSignIn: string = '';
+   responseCode: number;
    mensaje: string = '';
 
   signupUser(email: string, password: string){
     firebase.auth().createUserWithEmailAndPassword(email, password).then(
       response => {
-        this.errorSignUp = false;
+        this.responseSignUp = true;
+        this.responseCode= 1;
         this.mensaje = 'Su usuario se generó correctamente, por favor dirigirse a la pestaña Log In y autenticarse.';
         //console.log(firebase.auth().currentUser);
         // firebase.auth().currentUser.sendEmailVerification();
@@ -23,7 +25,8 @@ export class AuthService{
     )
     .catch(
       error => {console.log(error),
-        this.errorSignUp = true;
+        this.responseSignUp = true;
+        this.responseCode=2;
       this.mensaje = error.toString();
       }
     )
