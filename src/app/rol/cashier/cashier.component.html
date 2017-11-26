@@ -1,87 +1,111 @@
-<div class="well formStyle">
-  <div class="row">
-    <div class="form-group">
-      <div class="col-xs-8">
-        <h1>Registrar Orden</h1>
+<div class="row">
+  <div class="col-md-6">
+    <div class="well formStyle">
+      <div class="row">
+        <div class="form-group">
+          <div class="col-xs-12">
+            <h1>Registrar Orden</h1>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-xs-12">
+          <form [formGroup]="ordenForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="col-xs-12">
+                    <label for="plato">Plato</label>
+                  </div>
+                  <div class="col-xs-12" formArrayName="platos">
+                    <div class="row" *ngFor="let platoCtrl of ordenForm.get('platos').controls; let i = index" [formGroupName]="i" style="margin-top: 10px;">
+                      <div class="col-xs-6">
+                        <select class="form-control formStyle" formControlName="plato" required>
+                          <option *ngFor="let plato of platos; let id = index" [ngValue]="plato">{{plato.nombrePlato}} - S/{{plato.precio}}</option>
+                        </select>
+                      </div>
+                      <div class="col-xs-4">
+                        <input type="number" class="form-control formStyle" id="cantidad" formControlName="cantidad" placeholder="Cantidad" required>
+                      </div>
+                      <div class="col-xs-2">
+                        <button type="button" class="btn btn-danger" (click)="onDeletePlato(i)">X</button>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-xs-12">
+                        <button type="button" class="btn btn-success" (click)="onAddPlato()" [disabled]="!ordenForm.valid">Agregar Plato</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12">
+                <hr>
+              </div>
+              <div class="row">
+                <div class="col-xs-8">
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <label for="name">Nombre del Cliente</label>
+                      <input type="text" id="nombreCliente" class="form-control formStyle" placeholder="Nombre del Cliente" formControlName="nombreCliente" required>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-8">
+                    <div class="form-group">
+                      <div class="col-xs-6">
+                        <input type="number" id="monto" class="form-control" placeholder="Monto" style="background-color: rgba(255,255,255,0.05)" formControlName="monto" required [attr.disabled]="true">
+                      </div>
+                      <div class="col-xs-2">
+                        <button type="button" class="btn btn-primary" [disabled]="!ordenForm.valid" (click)="getMonto()">Monto</button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12">
+                <hr>
+              </div>
+              <div class="row">
+                <div class="col-xs-8">
+                  <div class="col-xs-12">
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-success" [disabled]="!ordenForm.valid">Save</button>
+                      <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="alert alert-success" *ngIf="ordenRegistrada">
+                <strong>Success!</strong> La orden se registró correctamente.
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-  <hr>
-  <div class="row">
-    <div class="col-xs-12">
-      <form [formGroup]="ordenForm" (ngSubmit)="onSubmit()">
-        <div class="row">
-          <div class="row">
-            <div class="col-xs-12">
-              <div class="col-xs-12">
-                <label for="plato">Plato</label>
-              </div>
-              <div class="col-xs-12" formArrayName="platos">
-                <div class="row" *ngFor="let platoCtrl of ordenForm.get('platos').controls; let i = index" [formGroupName]="i" style="margin-top: 10px;">
-                  <div class="col-xs-6">
-                    <select class="form-control formStyle" formControlName="plato" required>
-                      <option *ngFor="let plato of platos; let id = index" [ngValue]="plato">{{plato.nombrePlato}} - S/{{plato.precio}}</option>
-                    </select>
-                  </div>
-                  <div class="col-xs-4">
-                    <input type="number" class="form-control formStyle" id="cantidad" formControlName="cantidad" placeholder="Cantidad" required>
-                  </div>
-                  <div class="col-xs-2">
-                    <button type="button" class="btn btn-danger" (click)="onDeletePlato(i)">X</button>
-                  </div>
-                </div>
-                <hr>
-                <div class="row">
-                  <div class="col-xs-12">
-                    <button type="button" class="btn btn-success" (click)="onAddPlato()" [disabled]="!ordenForm.valid">Agregar Plato</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <hr>
-          </div>
-          <div class="row">
-            <div class="col-xs-8">
-              <div class="col-xs-12">
-                <div class="form-group">
-                  <label for="name">Nombre del Cliente</label>
-                  <input type="text" id="nombreCliente" class="form-control formStyle" placeholder="Nombre del Cliente" formControlName="nombreCliente" required>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-xs-8">
-                <div class="form-group">
-                  <div class="col-xs-6">
-                    <input type="number" id="monto" class="form-control" placeholder="Monto" style="background-color: rgba(255,255,255,0.05)" formControlName="monto" required [attr.disabled]="true">
-                  </div>
-                  <div class="col-xs-2">
-                    <button type="button" class="btn btn-primary" [disabled]="!ordenForm.valid" (click)="getMonto()">Monto</button>
-                  </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xs-12">
-            <hr>
-          </div>
-          <div class="row">
-            <div class="col-xs-8">
-              <div class="col-xs-12">
-                <div class="form-group">
-                  <button type="submit" class="btn btn-success" [disabled]="!ordenForm.valid">Save</button>
-                  <button type="button" class="btn btn-danger" (click)="onCancel()">Cancel</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="alert alert-success" *ngIf="ordenRegistrada">
-            <strong>Success!</strong> La orden se registró correctamente.
-          </div>
-        </div>
-      </form>
+  <div class="col-md-6">
+    <div class="well formStyle">
+      <table class="table table-hover">
+         <thead>
+           <tr>
+             <th>Nombre del Cliente</th>
+             <th>Estado</th>
+             <th>Platos</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr >
+             <td>sdfsdf</td>
+             <td>sdfdsf</td>
+             <td></td>
+           </tr>
+         </tbody>
+       </table>
     </div>
   </div>
 </div>
