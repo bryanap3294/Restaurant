@@ -12,8 +12,8 @@
           <label for="password">Password</label>
           <input type="password" id="password" name="password" ngModel class="form-control" required>
         </div>
-        <div class="alert alert-success" *ngIf="authService.responseSignUp">
-          <p [ngStyle]="{'color':authService.responseCode === 1 ? 'green' : 'red' }">{{authService.mensaje}}</p>
+        <div class="alert" [ngClass]="{'alert-success': authService.responseCode === 1, 'alert-danger': authService.responseCode === 2}" *ngIf="authService.responseSignUp">
+          <p>{{authService.mensaje}}</p>
         </div>
         <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Sign Up</button>
       </form>
