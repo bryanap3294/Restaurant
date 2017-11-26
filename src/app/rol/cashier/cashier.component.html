@@ -1,4 +1,4 @@
-<div class="well" style="background-color: rgba(255,255,255,0.05); color:white;">
+<div class="well formStyle">
   <div class="row">
     <div class="form-group">
       <div class="col-xs-8">
@@ -19,12 +19,12 @@
               <div class="col-xs-12" formArrayName="platos">
                 <div class="row" *ngFor="let platoCtrl of ordenForm.get('platos').controls; let i = index" [formGroupName]="i" style="margin-top: 10px;">
                   <div class="col-xs-6">
-                    <select class="form-control" formControlName="plato" required>
+                    <select class="form-control formStyle" formControlName="plato" required>
                       <option *ngFor="let plato of platos; let id = index" [ngValue]="plato">{{plato.nombrePlato}} - S/{{plato.precio}}</option>
                     </select>
                   </div>
                   <div class="col-xs-4">
-                    <input type="number" class="form-control" id="cantidad" formControlName="cantidad" required>
+                    <input type="number" class="form-control formStyle" id="cantidad" formControlName="cantidad" placeholder="Cantidad" required>
                   </div>
                   <div class="col-xs-2">
                     <button type="button" class="btn btn-danger" (click)="onDeletePlato(i)">X</button>
@@ -47,7 +47,7 @@
               <div class="col-xs-12">
                 <div class="form-group">
                   <label for="name">Nombre del Cliente</label>
-                  <input type="text" id="nombreCliente" class="form-control" formControlName="nombreCliente" required>
+                  <input type="text" id="nombreCliente" class="form-control formStyle" placeholder="Nombre del Cliente" formControlName="nombreCliente" required>
                 </div>
               </div>
             </div>
@@ -56,7 +56,7 @@
             <div class="col-xs-8">
                 <div class="form-group">
                   <div class="col-xs-6">
-                    <input type="number" id="monto" class="form-control" formControlName="monto" required [attr.disabled]="true">
+                    <input type="number" id="monto" class="form-control" placeholder="Monto" style="background-color: rgba(255,255,255,0.05)" formControlName="monto" required [attr.disabled]="true">
                   </div>
                   <div class="col-xs-2">
                     <button type="button" class="btn btn-primary" [disabled]="!ordenForm.valid" (click)="getMonto()">Monto</button>
