@@ -99,9 +99,9 @@
            </tr>
          </thead>
          <tbody>
-           <tr >
-             <td>prueba</td>
-             <td>prueba</td>
+           <tr *ngFor="let orden of ordenes; let id = index;">
+             <td>{{orden.nombreCliente}}</td>
+             <td>{{orden.estado | estado}}</td>
              <td>prueba</td>
            </tr>
          </tbody>

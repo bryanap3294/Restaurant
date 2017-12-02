@@ -25,6 +25,7 @@ export class CashierComponent implements OnInit {
   platoSeleccionado: false;
   ordenMonto;
   ordenRegistrada=false;
+  ordenes: Orden[];
 
   constructor(private route: ActivatedRoute,
     private ordenService: OrdenService,
@@ -47,6 +48,15 @@ export class CashierComponent implements OnInit {
         .subscribe(
         (platos: Plato[]) => {
           this.platos = platos;
+        }
+        );
+
+      this.dataStorageService.getOrdenes();
+      this.ordenes = this.ordenService.getOrdenes();
+      this.subscription = this.ordenService.ordenChanged
+        .subscribe(
+        (ordenes: Orden[]) => {
+          this.ordenes = ordenes;
         }
         );
     }

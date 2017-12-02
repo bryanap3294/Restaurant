@@ -93,7 +93,12 @@ export class ChefComponent implements OnInit, OnDestroy {
   }
 
   onSave() {
-
+    this.dataStorageService.storeOrdenes()
+      .subscribe(
+      (response: Response) => {
+        console.log(response);
+      }
+      );
   }
 
 }

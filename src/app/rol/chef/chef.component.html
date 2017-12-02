@@ -74,6 +74,11 @@
             type="submit"
             [disabled]="!f.valid">Update</button>
             <button
+            class="btn btn-success"
+            type="button"
+            (click)="onSave()"
+            >Save</button>
+            <button
             class="btn btn-danger"
             type="button"
             (click)="onDelete()"
