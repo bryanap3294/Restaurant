@@ -82,6 +82,8 @@ export class CashierComponent implements OnInit {
       (response: Response) => {
         console.log(response);
         this.ordenRegistrada=true;
+        this.dataStorageService.getOrdenes();
+        this.ordenes = this.ordenService.getOrdenes();
       }
     );
   }
