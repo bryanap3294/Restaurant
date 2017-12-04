@@ -84,12 +84,13 @@ export class CashierComponent implements OnInit {
         this.ordenRegistrada=true;
         this.dataStorageService.getOrdenes();
         this.ordenes = this.ordenService.getOrdenes();
+        this.ordenForm.reset();
       }
     );
   }
 
   onCancel() {
-    this.router.navigate(['../'], { relativeTo: this.route })
+    this.router.navigate(['../../'], { relativeTo: this.route })
   }
 
   private initForm() {

@@ -64,14 +64,18 @@
     </div>
   </div>
   <hr>
-  <ul class="list-group">
-    <a
-    class="list-group-item formStyle"
-    style="cursor: pointer;"
-    *ngFor="let plato of platos; let i = index"
-    (click)="onEditItem(i)"
-    >
-      {{plato.nombrePlato}} ({{plato.precio}})
-  </a>
-  </ul>
+  <table class="table table-bordered table-hover" style="cursor: pointer;">
+     <thead>
+       <tr>
+         <th>Nombre del Plato</th>
+         <th>Precio</th>
+       </tr>
+     </thead>
+     <tbody>
+       <tr *ngFor="let plato of platos; let i = index" class="table-dark" (click)="onEditItem(i)">
+         <td>{{plato.nombrePlato}}</td>
+         <td>{{plato.precio}}</td>
+       </tr>
+     </tbody>
+   </table>
 </div>
