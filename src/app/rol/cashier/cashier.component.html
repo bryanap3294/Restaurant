@@ -103,7 +103,7 @@
            <tr *ngFor="let orden of ordenes; let id = index;" class="table-dark">
              <td>{{orden.nombreCliente}}</td>
              <td>{{orden.estado | estado}}</td>
-             <td>prueba</td>
+             <td><tr *ngFor="let plato of orden.platos; let i = index;">{{plato.plato.nombrePlato}}</tr></td>
            </tr>
          </tbody>
        </table>
