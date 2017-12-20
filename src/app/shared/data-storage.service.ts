@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response} from '@angular/http';
+import {Headers, Http, Response, RequestOptions, RequestOptionsArgs, RequestMethod} from '@angular/http';
 import {OrdenService} from '../model/orden/orden.service';
 import {Orden} from '../model/orden/orden.model';
 import {Plato} from '../model/orden/plato/plato.model';
@@ -33,6 +33,15 @@ export class DataStorageService {
     .getNewOrden());
   }
 
+  postOrden(){
+    // const hola = ", 'Authorization': 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJicnlhbmFwMzI5NEBnbWFpbC5jb20iLCJleHAiOjE1MTQwNzIzODh9.8ixpDGiI8K2zZNG5dHcYiGf1QIQ3vBf6J1qBFpfQPYEA1gpT103TVA092NjtuAbUHGq6ZbrRScPEWeEtdqC0_Q'";
+    let headers = new Headers( { 'Content-Type': 'application/json' } );
+    let requestArg: RequestOptionsArgs = { headers: headers, method: "POST" };
+      return this.http.post('http://localhost:8080/api/orden',
+      this.ordenService
+    .getNewOrden(), requestArg);
+    }
+
   savePlatos() {
       const token = this.authService.getToken();
 
@@ -58,6 +67,33 @@ export class DataStorageService {
     );
   }
 
+  getOrdenessss(){
+
+    const token = this.authService.getToken();
+
+    this.http.get('http://localhost:8080/api/orden')
+    .map(
+      (response: Response) => {
+        console.log("bryna");
+        console.log(JSON.stringify(response));
+        const ordenes: any[] = response.json();
+        const res : Orden[] = <any[]>Object.values(ordenes);
+        console.log("res:");
+        console.log(res);
+        return res;
+      }
+    )
+    .subscribe(
+                (ordenes: Orden[]) => {
+                  console.log("aaa");
+                  const val: Orden[] = <Orden[]>Object.values(ordenes);
+                  console.log("val");
+                  console.log(val);
+                  this.ordenService.setOrdenes(val);
+                }
+    );
+  }
+
   getOrdenes(){
 
     const token = this.authService.getToken();
@@ -73,6 +109,8 @@ export class DataStorageService {
     .subscribe(
       (ordenes: Orden[]) => {
         const val: Orden[] = <Orden[]>Object.values(ordenes);
+        console.log("val");
+        console.log(val);
         this.ordenService.setOrdenes(val);
       }
     );
