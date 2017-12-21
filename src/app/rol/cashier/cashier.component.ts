@@ -84,9 +84,11 @@ export class CashierComponent implements OnInit {
         this.ordenRegistrada=true;
         this.dataStorageService.getOrdenes();
         this.ordenes = this.ordenService.getOrdenes();
-        this.ordenForm.reset();
       }
     );
+    this.ordenForm.get('nombreCliente').reset();
+    this.ordenForm.get('monto').setValue("Monto");
+    (<FormArray>this.ordenForm.get('platos')).reset();
   }
 
   onCancel() {
